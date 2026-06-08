@@ -164,6 +164,7 @@ export default function LeafletMap({ lang }: LeafletMapProps) {
               const props = feature.properties || {};
               const nameLao = props.Lao || props.lao || props.LAO_NAME || props.lao_name || props.Name || props.NAME || "";
               const nameEng = props.Engligh || props.Latine_Nam || props.english || props.ENG_NAME || props.eng_name || props.Name || props.NAME || "";
+              const displayName = lang === "lo" ? (nameLao || nameEng) : (nameEng || nameLao);
               
               const popupContent = `
                 <div class="font-sans text-xs p-1">
@@ -174,6 +175,12 @@ export default function LeafletMap({ lang }: LeafletMapProps) {
                 </div>
               `;
               layer.bindPopup(popupContent);
+
+              layer.bindTooltip(displayName, {
+                permanent: true,
+                direction: "center",
+                className: "district-map-label",
+              });
             }
           }).addTo(mapRef.current);
           districtLayerRef.current = districtLayer;
@@ -315,6 +322,7 @@ export default function LeafletMap({ lang }: LeafletMapProps) {
           const props = feature.properties;
           const nameLao = props.Lao || props.lao || props.LAO_NAME || props.lao_name || "";
           const nameEng = props.Engligh || props.Latine_Nam || props.english || props.ENG_NAME || props.eng_name || "";
+          const displayName = lang === "lo" ? (nameLao || nameEng) : (nameEng || nameLao);
           
           const popupContent = `
             <div class="font-sans text-xs p-1">
@@ -325,6 +333,7 @@ export default function LeafletMap({ lang }: LeafletMapProps) {
             </div>
           `;
           polygon.setPopupContent(popupContent);
+          polygon.setTooltipContent(displayName);
         }
       });
     }
@@ -359,6 +368,30 @@ export default function LeafletMap({ lang }: LeafletMapProps) {
       <p className="text-[10px] text-forest-500 mt-4 text-center italic z-20">
         {t.mapDisclaimer}
       </p>
+
+      {/* Custom Styles for Map Labels */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        .leaflet-tooltip.district-map-label {
+          background: rgba(15, 23, 42, 0.85) !important;
+          border: 1px solid rgba(192, 132, 252, 0.5) !important;
+          color: #f8fafc !important;
+          font-weight: 700 !important;
+          font-size: 11px !important;
+          padding: 4px 8px !important;
+          border-radius: 6px !important;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35) !important;
+          white-space: nowrap !important;
+          pointer-events: none !important;
+          font-family: inherit !important;
+        }
+        /* Hide the default tooltip triangle arrow */
+        .leaflet-tooltip.district-map-label::before {
+          border-top-color: transparent !important;
+          border-bottom-color: transparent !important;
+          border-left-color: transparent !important;
+          border-right-color: transparent !important;
+        }
+      `}} />
     </div>
   );
 }
