@@ -410,7 +410,7 @@ export default function Home() {
                       rel="noopener noreferrer"
                       className="text-[11px] sm:text-xs text-emerald-600 dark:text-emerald-400 font-semibold hover:underline block"
                     >
-                      facebook.com/namchouannamsang.offset
+                      facebook.com/ໂຄງການ ຄຊຊພ
                     </a>
                   </div>
                 </div>
