@@ -85,41 +85,7 @@ export default function LeafletMap({ lang }: LeafletMapProps) {
 
         const overlays: Record<string, L.Layer> = {};
 
-        // 1. Render District Boundaries (Background administrative layer, styled thin and dashed)
-        if (districtData) {
-          const districtLayer = L.geoJSON(districtData as any, {
-            style: {
-              color: "#cbd5e1", // Slate-300
-              weight: 1.5,
-              dashArray: "5, 5",
-              fillColor: "#94a3b8",
-              fillOpacity: 0.05,
-            },
-            onEachFeature: (feature, layer) => {
-              const props = feature.properties || {};
-              const nameLao = props.Lao || props.lao || props.LAO_NAME || props.lao_name || props.Name || props.NAME || "";
-              const nameEng = props.Engligh || props.Latine_Nam || props.english || props.ENG_NAME || props.eng_name || props.Name || props.NAME || "";
-              
-              const popupContent = `
-                <div class="font-sans text-xs p-1">
-                  <h4 class="font-bold text-slate-800 border-b border-slate-100 pb-1 mb-1">📍 ${lang === "lo" ? (nameLao || nameEng) : (nameEng || nameLao)}</h4>
-                  <p class="text-slate-500 text-[10px]">Lao: ${nameLao || "-"}</p>
-                  <p class="text-slate-500 text-[10px]">Eng: ${nameEng || "-"}</p>
-                  <p class="text-slate-650 mt-1 font-semibold">${lang === "lo" ? "ປະເພດ: ຂອບເຂດເມືອງ" : "Type: District Boundary"}</p>
-                </div>
-              `;
-              layer.bindPopup(popupContent);
-            }
-          }).addTo(mapRef.current);
-          districtLayerRef.current = districtLayer;
-          overlays[
-            lang === "lo" 
-              ? "🗺️ ຂອບເຂດເມືອງ (District Boundaries)" 
-              : "🗺️ District Boundaries"
-          ] = districtLayer;
-        }
-
-        // 2. Render Project Boundary Polygons (Green fill)
+        // 1. Render Project Boundary Polygons (Green fill)
         if (boundaryData) {
           const boundaryLayer = L.geoJSON(boundaryData as any, {
             style: {
@@ -153,7 +119,7 @@ export default function LeafletMap({ lang }: LeafletMapProps) {
           mapRef.current.fitBounds(bounds, { padding: [30, 30] });
         }
 
-        // 3. Render Totally Protected Zones (TPZ) (Orange/Red fill to denote strict protection)
+        // 2. Render Totally Protected Zones (TPZ) (Orange/Red fill to denote strict protection)
         if (tpzData) {
           const tpzLayer = L.geoJSON(tpzData as any, {
             style: {
@@ -183,6 +149,39 @@ export default function LeafletMap({ lang }: LeafletMapProps) {
               ? "🟠 ເຂດຫວງຫ້າມເດັດຂາດ (TPZ Core Zone)" 
               : "🟠 Totally Protected Zone (TPZ)"
           ] = tpzLayer;
+        }
+
+        // 3. Render District Boundaries (Background administrative layer, styled thin and dashed)
+        if (districtData) {
+          const districtLayer = L.geoJSON(districtData as any, {
+            style: {
+              color: "#c084fc", // Purple-400 to stand out clearly from Green (boundary) and Orange (TPZ)
+              weight: 2,
+              dashArray: "6, 6",
+              fill: false, // Ensure no fill so it doesn't block underlying layers
+            },
+            onEachFeature: (feature, layer) => {
+              const props = feature.properties || {};
+              const nameLao = props.Lao || props.lao || props.LAO_NAME || props.lao_name || props.Name || props.NAME || "";
+              const nameEng = props.Engligh || props.Latine_Nam || props.english || props.ENG_NAME || props.eng_name || props.Name || props.NAME || "";
+              
+              const popupContent = `
+                <div class="font-sans text-xs p-1">
+                  <h4 class="font-bold text-slate-800 border-b border-slate-100 pb-1 mb-1">📍 ${lang === "lo" ? (nameLao || nameEng) : (nameEng || nameLao)}</h4>
+                  <p class="text-slate-500 text-[10px]">Lao: ${nameLao || "-"}</p>
+                  <p class="text-slate-500 text-[10px]">Eng: ${nameEng || "-"}</p>
+                  <p class="text-slate-650 mt-1 font-semibold">${lang === "lo" ? "ປະເພດ: ຂອບເຂດເມືອງ" : "Type: District Boundary"}</p>
+                </div>
+              `;
+              layer.bindPopup(popupContent);
+            }
+          }).addTo(mapRef.current);
+          districtLayerRef.current = districtLayer;
+          overlays[
+            lang === "lo" 
+              ? "🗺️ ຂອບເຂດເມືອງ (District Boundaries)" 
+              : "🗺️ District Boundaries"
+          ] = districtLayer;
         }
 
         // 4. Render Village Circle Points (Red markers with bilingual hover popups)
