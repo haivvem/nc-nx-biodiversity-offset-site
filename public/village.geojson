@@ -1,0 +1,13 @@
+{
+"type": "FeatureCollection",
+"name": "VillageGeo",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{"type":"Feature","properties":{"fid_1":293.0,"OBJECTID":302,"VCCODE":1105187.0,"DCODE":1105.0,"PCODE":11.0,"LATDD":474518.362876,"LONDD":2066025.6913399999,"ENG_NAME":"B. Sopkhon","LAO_NAME":"ບ. ສົບຂອນ","X":null,"Y":null,"class":"V","Remark":"NC-NX"},"geometry":{"type":"Point","coordinates":[104.765464348172856,18.682548663526497]}},
+{"type":"Feature","properties":{"fid_1":302.0,"OBJECTID":312,"VCCODE":1105185.0,"DCODE":1105.0,"PCODE":11.0,"LATDD":479815.03859200003,"LONDD":2069557.5119099999,"ENG_NAME":"B. Muangcham","LAO_NAME":"ບ. ເມືອງຈຳ","X":null,"Y":null,"class":"V","Remark":"NC-NX"},"geometry":{"type":"Point","coordinates":[104.807689726771144,18.715884206210113]}},
+{"type":"Feature","properties":{"fid_1":305.0,"OBJECTID":318,"VCCODE":1105183.0,"DCODE":1105.0,"PCODE":11.0,"LATDD":481622.76552199997,"LONDD":2071363.6003399999,"ENG_NAME":"B. Phonmeuang","LAO_NAME":"ບ. ໂພນເມືອງ","X":null,"Y":null,"class":"V","Remark":"NC-NX"},"geometry":{"type":"Point","coordinates":[104.826215993110793,18.734418381579804]}},
+{"type":"Feature","properties":{"fid_1":344.0,"OBJECTID":0,"VCCODE":0.0,"DCODE":1106.0,"PCODE":11.0,"LATDD":445565.3903,"LONDD":2079514.8717,"ENG_NAME":"B. Vangphieng","LAO_NAME":"ບ. ວັງພຽງ","X":null,"Y":null,"class":"V","Remark":"NC-NX"},"geometry":{"type":"Point","coordinates":[104.483663408233184,18.80655993818543]}},
+{"type":"Feature","properties":{"fid_1":345.0,"OBJECTID":0,"VCCODE":0.0,"DCODE":1106.0,"PCODE":11.0,"LATDD":452135.6159,"LONDD":2071537.7205000001,"ENG_NAME":"B. Na Gnang","LAO_NAME":"ບ. ນາຍາງ","X":null,"Y":null,"class":"V","Remark":"NC-NX"},"geometry":{"type":"Point","coordinates":[104.544972523438389,18.735559116772833]}},
+{"type":"Feature","properties":{"fid_1":346.0,"OBJECTID":0,"VCCODE":0.0,"DCODE":1106.0,"PCODE":11.0,"LATDD":452668.7709,"LONDD":2064636.3451,"ENG_NAME":"B. Natan","LAO_NAME":"ບ. ນາຕັນ","X":null,"Y":null,"class":"V","Remark":"NC-NX"},"geometry":{"type":"Point","coordinates":[104.552804479060711,18.67416286419482]}}
+]
+}
